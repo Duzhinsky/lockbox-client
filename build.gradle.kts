@@ -1,2 +1,2 @@
-group = "ru.duzhinsky"
-version = "1.0-SNAPSHOT"
+group = "ru.duzhinsky.lockbox-client"
+version = "1.0"

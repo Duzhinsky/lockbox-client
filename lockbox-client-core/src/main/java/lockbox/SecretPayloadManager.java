@@ -4,7 +4,7 @@ import lockbox.domain.secret.SecretPayload;
 
 public interface SecretPayloadManager {
 
-    SecretPayload getPayload(String secretId);
+    SecretPayload getPayload(String IamToken, String secretId);
 
-    SecretPayload getPayload(String secretId, String versionId);
+    SecretPayload getPayload(String IamToken, String secretId, String versionId);
 }

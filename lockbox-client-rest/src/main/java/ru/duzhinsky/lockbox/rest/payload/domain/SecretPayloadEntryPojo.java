@@ -1,5 +1,7 @@
-package ru.duzhinsky.lockbox.rest.domain;
+package ru.duzhinsky.lockbox.rest.payload.domain;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Optional;
 import lockbox.domain.secret.SecretPayloadEntry;
 
@@ -11,10 +13,11 @@ public class SecretPayloadEntryPojo implements SecretPayloadEntry {
 
     private final String binaryValue;
 
+    @JsonCreator
     public SecretPayloadEntryPojo(
-        String key,
-        String textValue,
-        String binaryValue
+        @JsonProperty("key") String key,
+        @JsonProperty("textValue") String textValue,
+        @JsonProperty("binaryValue") String binaryValue
     ) {
         this.key = key;
         this.textValue = textValue;

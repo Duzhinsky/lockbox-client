@@ -1,30 +1,48 @@
 package ru.duzhinsky.lockbox.rest.payload;
 
-import java.util.Map;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
+import java.util.Optional;
 import lockbox.SecretPayloadManager;
-import ru.duzhinsky.lockbox.rest.common.Endpoint;
-import ru.duzhinsky.lockbox.rest.domain.SecretPayloadPojo;
+import org.apache.http.util.EntityUtils;
+import ru.duzhinsky.lockbox.rest.payload.domain.SecretPayloadPojo;
 
 public class RestSecretPayloadManager implements SecretPayloadManager {
 
-    private static final Endpoint getPayloadEndpoint = new Endpoint(
-        "GET",
-        "https://payload.lockbox.api.cloud.yandex.net/lockbox/v1/secrets/{secretId}/payload"
-    );
+    private final RestPayloadHttpClient proxy = new RestPayloadHttpClient();
+
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     public SecretPayloadPojo getPayload(String iamToken, String secretId, String versionId) {
-        Map<String, Object> params = versionId.isBlank()
-            ? Map.of() : Map.of("versionId", versionId);
-        return getPayloadEndpoint.request(
-            Map.of("Authorization", "Bearer " + iamToken),
-            Map.of("secretId", secretId),
-            params,
-            "",
-            SecretPayloadPojo.class
-        );
+        StringBuilder responseBody = new StringBuilder();
+        proxy.getPayload(iamToken, secretId, Optional.ofNullable(versionId), response -> {
+            switch (response.getStatusLine().getStatusCode()) {
+                case 403:
+                    // todo throw auth ex
+                    break;
+                case 404:
+                    break;
+                case 200:
+                    try {
+                        responseBody.append(EntityUtils.toString(response.getEntity()));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                default:
+            }
+        });
+
+        try {
+            return objectMapper.readValue(responseBody.toString(), SecretPayloadPojo.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
     }
 
     public SecretPayloadPojo getPayload(String iamToken, String secretId) {
-        return getPayload(iamToken, secretId, "");
+        return getPayload(iamToken, secretId, null);
     }
 }

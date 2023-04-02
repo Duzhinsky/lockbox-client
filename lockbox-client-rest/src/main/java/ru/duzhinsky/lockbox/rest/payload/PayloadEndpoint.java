@@ -15,6 +15,10 @@ public class PayloadEndpoint {
     }
 
     private URI getUri(String secretId, Optional<String> versionId) {
+        if ( secretId.isBlank() || versionId.stream().anyMatch(String::isBlank)) {
+            throw new IllegalArgumentException("secretId and versionId couldn't be blank");
+        }
+
         var pathBuilder =
             new StringBuilder("https://payload.lockbox.api.cloud.yandex.net/lockbox/v1/secrets/");
         pathBuilder.append(secretId).append("/").append("payload");

@@ -3,7 +3,7 @@ package ru.duzhinsky.lockbox.rest.payload.domain;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Optional;
-import lockbox.domain.secret.SecretPayloadEntry;
+import ru.duzhinsky.lockbox.domain.secret.SecretPayloadEntry;
 
 public class SecretPayloadEntryPojo implements SecretPayloadEntry {
 

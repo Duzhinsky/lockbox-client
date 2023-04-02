@@ -4,8 +4,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.Optional;
-import lockbox.SecretPayloadManager;
 import org.apache.http.util.EntityUtils;
+import ru.duzhinsky.lockbox.SecretPayloadManager;
+import ru.duzhinsky.lockbox.exception.LockboxException;
+import ru.duzhinsky.lockbox.exception.SecretNotFoundException;
+import ru.duzhinsky.lockbox.exception.UnauthorizedException;
 import ru.duzhinsky.lockbox.rest.payload.domain.SecretPayloadPojo;
 
 public class RestSecretPayloadManager implements SecretPayloadManager {
@@ -19,10 +22,9 @@ public class RestSecretPayloadManager implements SecretPayloadManager {
         proxy.getPayload(iamToken, secretId, Optional.ofNullable(versionId), response -> {
             switch (response.getStatusLine().getStatusCode()) {
                 case 403:
-                    // todo throw auth ex
-                    break;
+                    throw new UnauthorizedException(iamToken);
                 case 404:
-                    break;
+                    throw new SecretNotFoundException(secretId, versionId);
                 case 200:
                     try {
                         responseBody.append(EntityUtils.toString(response.getEntity()));
@@ -31,6 +33,7 @@ public class RestSecretPayloadManager implements SecretPayloadManager {
                     }
                     break;
                 default:
+                    throw new LockboxException("Unknown error");
             }
         });
 

@@ -1,4 +1,4 @@
-package lockbox.exception;
+package ru.duzhinsky.lockbox.exception;
 
 public class LockboxException extends RuntimeException {
 

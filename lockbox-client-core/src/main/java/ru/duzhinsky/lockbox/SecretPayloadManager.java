@@ -1,8 +1,8 @@
-package lockbox;
+package ru.duzhinsky.lockbox;
 
-import lockbox.domain.secret.SecretPayload;
-import lockbox.exception.SecretNotFoundException;
-import lockbox.exception.UnauthorizedException;
+import ru.duzhinsky.lockbox.domain.secret.SecretPayload;
+import ru.duzhinsky.lockbox.exception.SecretNotFoundException;
+import ru.duzhinsky.lockbox.exception.UnauthorizedException;
 
 public interface SecretPayloadManager {
 

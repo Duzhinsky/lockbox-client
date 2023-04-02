@@ -1,4 +1,4 @@
-package lockbox.domain.response;
+package ru.duzhinsky.lockbox.domain.response;
 
 import java.util.Optional;
 

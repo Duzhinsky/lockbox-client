@@ -1,4 +1,4 @@
-package lockbox.domain.secret;
+package ru.duzhinsky.lockbox.domain.secret;
 
 import java.util.Optional;
 

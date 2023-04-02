@@ -1,4 +1,4 @@
-package lockbox;
+package ru.duzhinsky.lockbox;
 
 public interface SecretManager {
 

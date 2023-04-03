@@ -35,7 +35,7 @@ public class SecretPayloadPojo implements SecretPayload {
     public String toString() {
         return "SecretPayloadPojo{" +
             "versionId='" + versionId + '\'' +
-            ", entries=" + payload +
+            ", payload=" + payload +
             '}';
     }
 }

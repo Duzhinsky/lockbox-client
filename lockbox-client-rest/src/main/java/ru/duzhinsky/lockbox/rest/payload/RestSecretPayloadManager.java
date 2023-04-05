@@ -10,7 +10,7 @@ import ru.duzhinsky.lockbox.exception.LockboxException;
 import ru.duzhinsky.lockbox.exception.SecretNotFoundException;
 import ru.duzhinsky.lockbox.exception.UnauthorizedException;
 import ru.duzhinsky.lockbox.model.secret.SecretPayload;
-import ru.duzhinsky.lockbox.rest.payload.domain.SecretPayloadDto;
+import ru.duzhinsky.lockbox.rest.payload.model.SecretPayloadDto;
 
 public class RestSecretPayloadManager implements SecretPayloadManager {
 

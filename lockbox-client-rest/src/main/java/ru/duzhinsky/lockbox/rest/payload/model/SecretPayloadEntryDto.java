@@ -1,21 +1,27 @@
-package ru.duzhinsky.lockbox.rest.payload.domain;
+package ru.duzhinsky.lockbox.rest.payload.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import ru.duzhinsky.lockbox.model.secret.PayloadEntryType;
 import ru.duzhinsky.lockbox.model.secret.SecretPayloadEntry;
 
-@Value
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class SecretPayloadEntryDto {
 
     @JsonProperty("key")
-    String key;
+    private String key;
 
     @JsonProperty("textValue")
-    String textValue;
+    private String textValue;
 
     @JsonProperty("binaryValue")
-    String binaryValue;
+    private String binaryValue;
 
     public SecretPayloadEntry toBusinessModel() {
         return new SecretPayloadEntry(

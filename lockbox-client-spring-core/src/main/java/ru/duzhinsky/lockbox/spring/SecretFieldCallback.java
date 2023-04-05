@@ -4,7 +4,7 @@ import java.lang.reflect.Field;
 import java.util.Optional;
 import org.springframework.util.ReflectionUtils.FieldCallback;
 import ru.duzhinsky.lockbox.SecretPayloadManager;
-import ru.duzhinsky.lockbox.domain.secret.SecretPayload;
+import ru.duzhinsky.lockbox.model.secret.SecretPayload;
 import yandex.cloud.sdk.auth.provider.CredentialProvider;
 
 public class SecretFieldCallback implements FieldCallback {

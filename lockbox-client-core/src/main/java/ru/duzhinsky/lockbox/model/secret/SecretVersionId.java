@@ -1,4 +1,4 @@
-package ru.duzhinsky.lockbox.domain.secret;
+package ru.duzhinsky.lockbox.model.secret;
 
 public interface SecretVersionId {
 

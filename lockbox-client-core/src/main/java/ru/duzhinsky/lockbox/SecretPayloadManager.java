@@ -1,6 +1,6 @@
 package ru.duzhinsky.lockbox;
 
-import ru.duzhinsky.lockbox.domain.secret.SecretPayload;
+import ru.duzhinsky.lockbox.model.secret.SecretPayload;
 import ru.duzhinsky.lockbox.exception.SecretNotFoundException;
 import ru.duzhinsky.lockbox.exception.UnauthorizedException;
 

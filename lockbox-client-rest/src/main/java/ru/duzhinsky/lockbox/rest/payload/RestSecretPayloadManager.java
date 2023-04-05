@@ -9,7 +9,8 @@ import ru.duzhinsky.lockbox.SecretPayloadManager;
 import ru.duzhinsky.lockbox.exception.LockboxException;
 import ru.duzhinsky.lockbox.exception.SecretNotFoundException;
 import ru.duzhinsky.lockbox.exception.UnauthorizedException;
-import ru.duzhinsky.lockbox.rest.payload.domain.SecretPayloadPojo;
+import ru.duzhinsky.lockbox.model.secret.SecretPayload;
+import ru.duzhinsky.lockbox.rest.payload.domain.SecretPayloadDto;
 
 public class RestSecretPayloadManager implements SecretPayloadManager {
 
@@ -17,7 +18,8 @@ public class RestSecretPayloadManager implements SecretPayloadManager {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public SecretPayloadPojo getPayload(String iamToken, String secretId, String versionId) {
+    @Override
+    public SecretPayload getPayload(String iamToken, String secretId, String versionId) {
         StringBuilder responseBody = new StringBuilder();
         proxy.getPayload(iamToken, secretId, Optional.ofNullable(versionId), response -> {
             switch (response.getStatusLine().getStatusCode()) {
@@ -38,14 +40,17 @@ public class RestSecretPayloadManager implements SecretPayloadManager {
         });
 
         try {
-            return objectMapper.readValue(responseBody.toString(), SecretPayloadPojo.class);
+            return objectMapper
+                .readValue(responseBody.toString(), SecretPayloadDto.class)
+                .toBusinessModel();
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             throw new RuntimeException();
         }
     }
 
-    public SecretPayloadPojo getPayload(String iamToken, String secretId) {
+    @Override
+    public SecretPayload getPayload(String iamToken, String secretId) {
         return getPayload(iamToken, secretId, null);
     }
 }

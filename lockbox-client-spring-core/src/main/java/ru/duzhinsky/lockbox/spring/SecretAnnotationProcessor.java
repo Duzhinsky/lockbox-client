@@ -46,4 +46,8 @@ public class SecretAnnotationProcessor implements BeanPostProcessor {
             new SecretFieldCallback(secretPayloadManager, credentialProvider, bean);
         ReflectionUtils.doWithFields(managedBeanClass, fieldCallback);
     }
+
+    private void configureParameterInjection(Object bean) {
+        Class<?> managedBeanClass = bean.getClass();
+    }
 }

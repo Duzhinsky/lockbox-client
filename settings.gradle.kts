@@ -1,4 +1,7 @@
 rootProject.name = "lockbox-client"
-include("lockbox-client-core")
-include("lockbox-client-rest")
-include("lockbox-client-spring-core")
+
+includeBuild("lockbox-client-core")
+includeBuild("lockbox-client-spring-core")
+
+includeBuild("rest/lockbox-client-rest")
+includeBuild("rest/lockbox-client-spring-boot-starter-rest")

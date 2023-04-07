@@ -2,7 +2,7 @@ plugins {
     `java-library`
 }
 
-group = "ru.duzhinsky.lockbox-client"
+group = "ru.duzhinsky"
 version = "1.0"
 
 repositories {
@@ -10,9 +10,9 @@ repositories {
 }
 
 dependencies {
-    compileOnly("com.yandex.cloud:java-sdk-auth:2.6.0")
-    compileOnly(project(":lockbox-client-core"))
-    compileOnly("org.springframework:spring-beans:5.2.23.RELEASE")
+    api("ru.duzhinsky:lockbox-client-core:${version}")
+    api("com.yandex.cloud:java-sdk-auth:2.6.0")
+    implementation("org.springframework:spring-beans:5.2.23.RELEASE")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 }

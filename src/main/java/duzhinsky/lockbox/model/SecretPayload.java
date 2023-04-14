@@ -1,6 +1,7 @@
 package duzhinsky.lockbox.model;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.Value;
 import yandex.cloud.api.lockbox.v1.PayloadOuterClass;
@@ -11,6 +12,12 @@ public class SecretPayload {
     String versionId;
 
     List<SecretPayloadEntry> entries;
+
+    public Optional<SecretPayloadEntry> findEntryByKey(String key) {
+        return entries.stream()
+            .filter(entry -> entry.getKey().equals(key))
+            .findFirst();
+    }
 
     public static SecretPayload fromGrpc(PayloadOuterClass.Payload grpcPayload) {
         return new SecretPayload(

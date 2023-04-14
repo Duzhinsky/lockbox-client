@@ -12,7 +12,7 @@ repositories {
 dependencies {
     api("ru.duzhinsky:lockbox-client-core:${version}")
     api("com.yandex.cloud:java-sdk-auth:2.6.0")
-    implementation("org.springframework:spring-beans:5.2.23.RELEASE")
+    implementation("org.springframework:spring-context:5.3.18")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 }

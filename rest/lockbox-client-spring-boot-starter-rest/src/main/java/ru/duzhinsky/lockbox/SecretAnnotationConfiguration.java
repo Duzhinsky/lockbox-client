@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import ru.duzhinsky.lockbox.rest.payload.RestSecretPayloadManager;
-import ru.duzhinsky.lockbox.spring.SecretAnnotationProcessor;
 import yandex.cloud.sdk.auth.provider.CredentialProvider;
 
 @Configuration

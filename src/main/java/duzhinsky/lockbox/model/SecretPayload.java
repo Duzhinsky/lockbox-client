@@ -1,5 +1,6 @@
 package duzhinsky.lockbox.model;
 
+import duzhinsky.lockbox.model.SecretPayloadEntry.TextOrBinary;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -17,6 +18,12 @@ public class SecretPayload {
         return entries.stream()
             .filter(entry -> entry.getKey().equals(key))
             .findFirst();
+    }
+
+    public Optional<String> getTextByKey(String key) {
+        return findEntryByKey(key)
+            .map(SecretPayloadEntry::getValue)
+            .flatMap(TextOrBinary::getText);
     }
 
     public static SecretPayload fromGrpc(PayloadOuterClass.Payload grpcPayload) {

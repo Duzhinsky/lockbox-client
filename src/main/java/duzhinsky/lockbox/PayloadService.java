@@ -1,5 +1,6 @@
 package duzhinsky.lockbox;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import duzhinsky.lockbox.model.SecretPayload;
 import java.time.Duration;
 import yandex.cloud.api.lockbox.v1.PayloadServiceGrpc;
@@ -11,6 +12,8 @@ import yandex.cloud.sdk.auth.provider.CredentialProvider;
 public class PayloadService {
 
     private final PayloadServiceBlockingStub payloadServiceBlockingStub;
+
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     public PayloadService(CredentialProvider credentialProvider, Duration timeout) {
         payloadServiceBlockingStub = ServiceFactory.builder()

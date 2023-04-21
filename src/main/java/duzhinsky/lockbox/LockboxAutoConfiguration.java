@@ -18,4 +18,9 @@ public class LockboxAutoConfiguration {
     ) {
         return new PayloadService(credentialProvider, timeout);
     }
+
+    @Bean
+    public MappedSecretBeanPostProcessor mappedSecretBeanPostProcessor(PayloadService payloadService) {
+        return new MappedSecretBeanPostProcessor(payloadService);
+    }
 }
